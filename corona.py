@@ -1,11 +1,9 @@
 
 import requests
-import pandas as pd
 from bs4 import BeautifulSoup
 import schedule
 import time
 import telebot
-
 
 
 
@@ -62,7 +60,7 @@ try:
             elif item == lable_confirmed_today[3]:
                 bot.send_message(chat_id,today_confirmed_number[3])
         index1 +=1
-except Exception as error:
+except:
         bot.send_message(chat_id, 'error')
 
 
@@ -82,7 +80,7 @@ try:
              elif item == all_number_confirmed[3]:
                  bot.send_message(chat_id,lable_all_confirmed[3])
         index2 +=1
-except Exception as er:
+except:
     bot.send_message(chat_id,'error')
 
 
