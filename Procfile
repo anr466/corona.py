@@ -1,1 +1,1 @@
-worker: python corona.py 
+worker: python corona.py

@@ -1,7 +1,6 @@
 
 import requests
 from bs4 import BeautifulSoup
-import schedule
 import time
 import telebot
 
@@ -39,7 +38,7 @@ lable_all_confirmed = [item.find(class_='mb-0 font-30 text-white').get_text() fo
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-	bot.reply_to(message, "Howdy, how are you doing?")
+    bot.reply_to(message, "Howdy, how are you doing?")
 
 
 
@@ -95,14 +94,16 @@ def showbotdelay():
     allconfirmed()
 
 
+showbotdelay()
+
 
 # البوت يعمل للابد
 while True:
     try:
         # يعمل للابد
-        schedule.every().day.at("00:15").do(showbotdelay())
+        
         bot.polling(none_stop=True)
-        schedule.run_pending()
+        
 
     except Exception:
         #هنا في حالة الخروج من البرنامج يتوقف ١٥ ثانيه 
