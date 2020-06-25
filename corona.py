@@ -37,6 +37,9 @@ class_for_all_confirmed = soup.find_all(class_='col-lg-6 col-xl-4')
 all_number_confirmed = [item.find(class_='card-title font-14 text-white').get_text() for item in class_for_all_confirmed]
 lable_all_confirmed = [item.find(class_='mb-0 font-30 text-white').get_text() for item in class_for_all_confirmed]
 
+@bot.message_handler(commands=['start', 'help'])
+def send_welcome(message):
+	bot.reply_to(message, "Howdy, how are you doing?")
 
 
 
@@ -62,6 +65,8 @@ try:
         index1 +=1
 except:
         bot.send_message(chat_id, 'error')
+
+
 
 
 
