@@ -1,8 +1,11 @@
 
 import requests
 from bs4 import BeautifulSoup
+import schedule
 import time
 import telebot
+
+
 # نضع التوكن لبوت التلقرام
 TOKEN = "1041038137:AAEwfNa6L05P1EqcHGw_JsJ9VF4w6sxsF0o"
 # لازم نضع المعرف الرقمي للقناه بالتلقرام
@@ -72,12 +75,15 @@ except:
 def showbotdelay():
     todayconfirmed()
     allconfirmed()
-showbotdelay()
+
+schedule.every(10).minutes.do(showbotdelay)
 # البوت يعمل للابد
 while True:
     try:
         # يعمل للاب
         bot.polling(none_stop=True)
+        schedule.run_pending()
+        
     except Exception:
         #هنا في حالة الخروج من البرنامج يتوقف ١٥ ثانيه 
         time.sleep(15)
