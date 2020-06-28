@@ -3,9 +3,6 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import telebot
-
-
-
 # نضع التوكن لبوت التلقرام
 TOKEN = "1041038137:AAEwfNa6L05P1EqcHGw_JsJ9VF4w6sxsF0o"
 # لازم نضع المعرف الرقمي للقناه بالتلقرام
@@ -23,20 +20,15 @@ page = response.content
 #نستخدم المكتبه BeautifulSoup
 #لا استعراض محتويات الموقع الاندكس بلغة html
 soup = BeautifulSoup(page , 'html.parser')
-
-
 # نبحث عن المحتوى النصي الذي نريد استخدامه او استعراضه من الموقع
 class_for_confirmed_today = soup.find_all(class_='col-lg-6 col-xl-6')
 #هذا الاستعلام يجلب لنا الحالات اليوميه
 today_confirmed_number = [item.find(class_='mb-0 font-30 text-white').get_text() for item in class_for_confirmed_today]
 lable_confirmed_today = [item.find(class_='card-title font-14 text-white').get_text() for item in class_for_confirmed_today]
-
 # يجلب لنا جميع الحالات 
 class_for_all_confirmed = soup.find_all(class_='col-lg-6 col-xl-4')
 all_number_confirmed = [item.find(class_='card-title font-14 text-white').get_text() for item in class_for_all_confirmed]
 lable_all_confirmed = [item.find(class_='mb-0 font-30 text-white').get_text() for item in class_for_all_confirmed]
-
-
 
 try:
     def todayconfirmed():
@@ -60,11 +52,6 @@ try:
         index1 +=1
 except:
         bot.send_message(chat_id, 'error')
-
-
-
-
-
 try:
     def allconfirmed(): 
         index2 = 0 
@@ -82,28 +69,15 @@ try:
         index2 +=1
 except:
     bot.send_message(chat_id,'error')
-
-
 def showbotdelay():
-
     todayconfirmed()
     allconfirmed()
-
-
 showbotdelay()
-
-
-
-
-
 # البوت يعمل للابد
 while True:
     try:
-        # يعمل للابد
-        
+        # يعمل للاب
         bot.polling(none_stop=True)
-        
-
     except Exception:
         #هنا في حالة الخروج من البرنامج يتوقف ١٥ ثانيه 
         time.sleep(15)
