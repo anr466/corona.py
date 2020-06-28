@@ -1,5 +1,6 @@
-telepot==0.0.3
-requests==2.22.0
-beautifulsoup4 ==0.0.1
+pyTelegramBotAPI==3.7.1    
+requests==2.20.0
+bs4 ==0.0.1
+
 
 
