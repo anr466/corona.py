@@ -7,11 +7,11 @@ import telebot
 
 
 # نضع التوكن لبوت التلقرام
-TOKEN = "1041038137:AAHpHkRgWmLQ-08APvNb0Jl-FYtLwe5P_Rw"
+TOKEN = "1041038137:AAEwfNa6L05P1EqcHGw_JsJ9VF4w6sxsF0o"
 # لازم نضع المعرف الرقمي للقناه بالتلقرام
 chat_id = '174958495'
 #ربط التوكن مع مكتبة التلقرام
-bot = telebot.TeleBot(token=TOKEN)
+bot = telebot.TeleBot(TOKEN)
 #الاوامر
 #updater = Updater(token='TOKEN', use_context=True)
 # الموقع المستخدم لجلب الحالات نضعه في متغير 
@@ -35,10 +35,6 @@ lable_confirmed_today = [item.find(class_='card-title font-14 text-white').get_t
 class_for_all_confirmed = soup.find_all(class_='col-lg-6 col-xl-4')
 all_number_confirmed = [item.find(class_='card-title font-14 text-white').get_text() for item in class_for_all_confirmed]
 lable_all_confirmed = [item.find(class_='mb-0 font-30 text-white').get_text() for item in class_for_all_confirmed]
-
-@bot.message_handler(commands=['start', 'help'])
-def send_welcome(message):
-    bot.reply_to(message, "Howdy, how are you doing?")
 
 
 
@@ -95,6 +91,9 @@ def showbotdelay():
 
 
 showbotdelay()
+
+
+
 
 
 # البوت يعمل للابد
