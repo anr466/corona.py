@@ -1,9 +1,3 @@
-pyTelegramBotAPI==3.7.1    
-requests==2.20.0
-bs4 ==0.0.1
-<<<<<<< HEAD
-=======
-
->>>>>>> 320c8e70c152090453eb42588413cf0eed0b07f2
-
-
+telepot==12.7      
+requests==2.20.0    
+bs4==0.0.1     
