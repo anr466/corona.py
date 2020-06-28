@@ -76,14 +76,17 @@ def showbotdelay():
     todayconfirmed()
     allconfirmed()
 
-schedule.every(10).minutes.do(showbotdelay)
+schedule.every(10).minutes.do(showbotdelay())
 # البوت يعمل للابد
 while True:
+
     try:
         # يعمل للاب
         bot.polling(none_stop=True)
         schedule.run_pending()
+        time.sleep(1)
         
-    except Exception:
+    except:
+
         #هنا في حالة الخروج من البرنامج يتوقف ١٥ ثانيه 
         time.sleep(15)
