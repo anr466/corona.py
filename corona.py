@@ -73,8 +73,8 @@ try:
 except:
     bot.send_message(chat_id,'error')
 def showbotdelay():
-    todayconfirmed()
-    allconfirmed()
+
+    return todayconfirmed() ,allconfirmed()
 
 schedule.every(10).minutes.do(showbotdelay())
 # البوت يعمل للابد
