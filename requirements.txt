@@ -1,4 +1,4 @@
-teleBot==12.7      
+telebot==0.0.3         
 requests==2.20.0    
 bs4==0.0.1     
 schedule==0.6.0
