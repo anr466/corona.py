@@ -1,7 +1,6 @@
 
 import requests
 from bs4 import BeautifulSoup
-import schedule
 import time
 import telebot
 
@@ -76,15 +75,15 @@ def showbotdelay():
 
     return todayconfirmed() ,allconfirmed()
 
-schedule.every(10).minutes.do(showbotdelay())
+showbotdelay()
+
 # البوت يعمل للابد
 while True:
 
     try:
         # يعمل للاب
         bot.polling(none_stop=True)
-        schedule.run_pending()
-        time.sleep(1)
+    
         
     except:
 
