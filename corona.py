@@ -82,18 +82,18 @@ def showbotdelay():
 
 
 
-
+showbotdelay()
 
 
 #@bot.message_handler(commands=['start', 'help'])
 #def send_welcome(message):
 #	bot.reply_to(message, f'الحالات اليوميه  {showbotdelay()}')
 
-@bot.message_handler(func=lambda message: True)
-def echo_all(message):
-	bot.reply_to(message, message.text)
+#@bot.message_handler(func=lambda message: True)
+#def echo_all(message):
+#	bot.reply_to(message, message.text)
 
-schedule.every().hour.do(showbotdelay)
+schedule.every(10).minutes.do(showbotdelay)
 
 # البوت يعمل للابد
 while True:
