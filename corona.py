@@ -3,8 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import telebot
-
-
+import schedule
 # نضع التوكن لبوت التلقرام
 TOKEN = "1041038137:AAEwfNa6L05P1EqcHGw_JsJ9VF4w6sxsF0o"
 # لازم نضع المعرف الرقمي للقناه بالتلقرام
@@ -34,19 +33,23 @@ lable_all_confirmed = [item.find(class_='mb-0 font-30 text-white').get_text() fo
 
 try:
     def todayconfirmed():
-        bot.send_message(chat_id,'الحالات اليوميه لمصابي فايروس كورونا بالسعوديه ')
+        bot.send_message(chat_id,'الحالات اليوميه لمصابي فايروس كورونا بالسعوديه فور الاعلان عنها ')
         index1 = 0 
         # يعرض اصابات اليوم فقط
         for item in lable_confirmed_today:
 
             bot.send_message(chat_id,item)
             if item == lable_confirmed_today[0]:
-                if today_confirmed_number[0] == 0:
+                if today_confirmed_number[0] == "0":
                      bot.send_message(chat_id,"لم يتم التحديث بعد")
                 else:
                      bot.send_message(chat_id,today_confirmed_number[0])
             elif item == lable_confirmed_today[1]:
-                bot.send_message(chat_id,today_confirmed_number[1])
+                if today_confirmed_number[1] == "0":
+                     bot.send_message(chat_id,"لم يتم التحديث بعد")
+                else:
+                     bot.send_message(chat_id,today_confirmed_number[1])
+                
             elif item == lable_confirmed_today[2]:
                 bot.send_message(chat_id,today_confirmed_number[2])
             elif item == lable_confirmed_today[3]:
@@ -71,12 +74,14 @@ try:
         index2 +=1
 except:
     bot.send_message(chat_id,'error')
+
+    
 def showbotdelay():
 
     return todayconfirmed() ,allconfirmed()
 
 
-showbotdelay()
+
 
 
 
@@ -88,17 +93,11 @@ def send_welcome(message):
 def echo_all(message):
 	bot.reply_to(message, message.text)
 
-
+schedule.every().hour.do(showbotdelay)
 
 # البوت يعمل للابد
 while True:
-
-    try:
-        # يعمل للاب
-        bot.polling(none_stop=True)
-    
-        
-    except:
-
-        #هنا في حالة الخروج من البرنامج يتوقف ١٥ ثانيه 
-        time.sleep(15)
+       # يعمل للاب
+    bot.polling(none_stop=True)
+    schedule.run_pending()
+    time.sleep(15)
