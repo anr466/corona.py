@@ -75,7 +75,7 @@ try:
 except:
     bot.send_message(chat_id,'error')
 
-    
+
 def showbotdelay():
 
     return todayconfirmed() ,allconfirmed()
@@ -85,9 +85,9 @@ def showbotdelay():
 
 
 
-@bot.message_handler(commands=['start', 'help'])
-def send_welcome(message):
-	bot.reply_to(message, f'الحالات اليوميه  {showbotdelay()}')
+#@bot.message_handler(commands=['start', 'help'])
+#def send_welcome(message):
+#	bot.reply_to(message, f'الحالات اليوميه  {showbotdelay()}')
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
