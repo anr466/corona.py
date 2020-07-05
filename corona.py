@@ -1,11 +1,16 @@
 
-import requests
+
 from bs4 import BeautifulSoup
 import time
+import os
+import Flask
+import requests
+from Flask import Flask, request
 import telebot
 import schedule
 # نضع التوكن لبوت التلقرام
 TOKEN = "1041038137:AAEwfNa6L05P1EqcHGw_JsJ9VF4w6sxsF0o"
+server = Flask(__name__)
 # لازم نضع المعرف الرقمي للقناه بالتلقرام
 chat_id = '174958495'
 #ربط التوكن مع مكتبة التلقرام
@@ -32,7 +37,7 @@ all_number_confirmed = [item.find(class_='card-title font-14 text-white').get_te
 lable_all_confirmed = [item.find(class_='mb-0 font-30 text-white').get_text() for item in class_for_all_confirmed]
 
 try:
-    def todayconfirmed():
+    def todayconfirmed(*args,**kwargs):
         bot.send_message(chat_id,'الحالات اليوميه لمصابي فايروس كورونا بالسعوديه فور الاعلان عنها ')
         index1 = 0 
         # يعرض اصابات اليوم فقط
@@ -58,7 +63,7 @@ try:
 except:
         bot.send_message(chat_id, 'error')
 try:
-    def allconfirmed(): 
+    def allconfirmed(*args,**kwargs): 
         index2 = 0 
         bot.send_message(chat_id,text = 'اجمالي عدد الحالات')
         for item in all_number_confirmed:
@@ -76,28 +81,43 @@ except:
     bot.send_message(chat_id,'error')
 
 
-def showbotdelay():
+def showbotdelay(*args,**kwargs):
 
-    return todayconfirmed() ,allconfirmed()
-
-
-
-showbotdelay()
+     todayconfirmed ,allconfirmed
 
 
-#@bot.message_handler(commands=['start', 'help'])
-#def send_welcome(message):
-#	bot.reply_to(message, f'الحالات اليوميه  {showbotdelay()}')
 
-#@bot.message_handler(func=lambda message: True)
-#def echo_all(message):
-#	bot.reply_to(message, message.text)
 
-schedule.every(10).minutes.do(showbotdelay)
+#showbotdelay()
 
-# البوت يعمل للابد
-while True:
-       # يعمل للاب
-    bot.polling(none_stop=True)
-    schedule.run_pending()
-    time.sleep(15)
+
+      
+
+@bot.message_handler(commands=['start', 'help'])
+def send_welcome(message):
+	bot.reply_to(message, f'الحالات اليوميه  {showbotdelay()}')
+
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+	bot.reply_to(message, message.text)
+
+schedule.every(1).minutes.do(todayconfirmed(),allconfirmed())
+
+
+
+
+@server.route('/' + TOKEN, methods=['POST'])
+def getMessage():
+    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+    return "!", 200
+
+
+@server.route("/")
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url='https://your_heroku_project.com/' + TOKEN)
+    return "!", 200
+
+
+if __name__ == "__main__":
+    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
