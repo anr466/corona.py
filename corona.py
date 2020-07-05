@@ -6,7 +6,7 @@ import requests
 import flask
 from flask import Flask, request
 import telebot
-#import schedule
+import schedule
 # نضع التوكن لبوت التلقرام
 TOKEN = "1041038137:AAEwfNa6L05P1EqcHGw_JsJ9VF4w6sxsF0o"
 server = Flask(__name__)
@@ -80,31 +80,21 @@ except:
     bot.send_message(chat_id,'error')
 
 
-def showbotdelay(*args,**kwargs):
 
-     todayconfirmed() ,allconfirmed()
-
-
-
-
-#showbotdelay()
-
-
-      
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-	bot.reply_to(message, f'الحالات اليوميه  {todayconfirmed(),allconfirmed()}')
+	bot.reply_to(message, f'welcome {todayconfirmed(),allconfirmed()}')
 
 
 
-#schedule.every(4).minutes.do(todayconfirmed(),allconfirmed())
+schedule.every().day.at("10:30").do(todayconfirmed(),allconfirmed())
 
 
 while True:
     try:
         bot.polling(none_stop=True)
-        #schedule.run_pending()  
+        schedule.run_pending()  
             
     except:
         time.sleep(1)
