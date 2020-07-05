@@ -88,7 +88,7 @@ def showbotdelay(*args,**kwargs):
 
 
 
-#showbotdelay()
+showbotdelay()
 
 
       
@@ -101,7 +101,16 @@ def send_welcome(message):
 def echo_all(message):
 	bot.reply_to(message, message.text)
 
-schedule.every(1).minutes.do(todayconfirmed(),allconfirmed())
+schedule.every(4).minutes.do(todayconfirmed(),allconfirmed())
+
+
+while True:
+    try:
+        bot.polling(none_stop=True)
+        schedule.run_pending()  
+            
+    except:
+        time.sleep(1)
 
 
 
