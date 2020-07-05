@@ -98,13 +98,13 @@ def send_welcome(message):
 
 
 
-#schedule.every(4).minutes.do(todayconfirmed(),allconfirmed())
+schedule.every(4).minutes.do(todayconfirmed(),allconfirmed())
 
 
 while True:
     try:
         bot.polling(none_stop=True)
-        #schedule.run_pending()  
+        schedule.run_pending()  
             
     except:
         time.sleep(1)
