@@ -96,9 +96,7 @@ showbotdelay()
 def send_welcome(message):
 	bot.reply_to(message, f'الحالات اليوميه  {todayconfirmed(),allconfirmed()}')
 
-@bot.message_handler(func=lambda message: True)
-def echo_all(message):
-	bot.reply_to(message, message.text)
+
 
 #schedule.every(4).minutes.do(todayconfirmed(),allconfirmed())
 
