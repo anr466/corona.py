@@ -124,7 +124,7 @@ def getMessage():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='https://still-harbor-13464.herokuapp.com/' + TOKEN)
+    bot.set_webhook(url='https://secure-refuge-39491.herokuapp.com/' + TOKEN)
     return "!", 200
 
 
