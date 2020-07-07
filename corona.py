@@ -1,8 +1,7 @@
-
+import requests
 from bs4 import BeautifulSoup
 import time
 import os
-import requests
 import flask
 from flask import Flask, request
 import telebot
@@ -35,8 +34,7 @@ class_for_all_confirmed = soup.find_all(class_='col-lg-6 col-xl-4')
 all_number_confirmed = [item.find(class_='card-title font-14 text-white').get_text() for item in class_for_all_confirmed]
 lable_all_confirmed = [item.find(class_='mb-0 font-30 text-white').get_text() for item in class_for_all_confirmed]
 
-try:
-    def todayconfirmed(*args,**kwargs):
+def todayconfirmed():
         bot.send_message(chat_id,'الحالات اليوميه لمصابي فايروس كورونا بالسعوديه فور الاعلان عنها ')
         index1 = 0 
         # يعرض اصابات اليوم فقط
@@ -59,10 +57,11 @@ try:
             elif item == lable_confirmed_today[3]:
                 bot.send_message(chat_id,today_confirmed_number[3])
         index1 +=1
-except:
-        bot.send_message(chat_id, 'error')
-try:
-    def allconfirmed(*args,**kwargs): 
+        return
+
+
+
+def allconfirmed(): 
         index2 = 0 
         bot.send_message(chat_id,text = 'اجمالي عدد الحالات')
         for item in all_number_confirmed:
@@ -76,20 +75,28 @@ try:
              elif item == all_number_confirmed[3]:
                  bot.send_message(chat_id,lable_all_confirmed[3])
         index2 +=1
-except:
-    bot.send_message(chat_id,'error')
+        return
 
+
+def todayshow(confirmed,allconfirmedd):
+    confirmed.todayconfirmed()
+    allconfirmedd.allconfirmed()
+    return ([confirmed,allconfirmedd])
 
 
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-	bot.reply_to(message, f'welcome {todayconfirmed(),allconfirmed()}')
+	bot.reply_to(message, f'هذي تحديثات اليوم  {todayshow(todayconfirmed(),allconfirmed())}')
 
 
+@bot.message_handler(func=lambda message: True)
+def echo_message(message):
+    bot.reply_to(message, "لم افهم ماذا تريد لعرض الحالات اليوميه اظغط على /start وكل يوم سوف يتم اخبارك بالحالات اليومية نتمنى لك الصحه والعافيه ")
 
-schedule.every().day.at("10:30").do(todayconfirmed(),allconfirmed())
 
+schedule.every().day.at("18:00").do(todayshow,todayconfirmed())
+schedule.every().day.at("18:00").do(todayshow,allconfirmed())
 
 while True:
     try:
