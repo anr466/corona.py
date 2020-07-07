@@ -95,13 +95,14 @@ def echo_message(message):
     bot.reply_to(message, "لم افهم ماذا تريد لعرض الحالات اليوميه اظغط على /start وكل يوم سوف يتم اخبارك بالحالات اليومية نتمنى لك الصحه والعافيه ")
 
 
-schedule.every().day.at("18:00").do(todayshow,todayconfirmed())
-schedule.every().day.at("18:00").do(todayshow,allconfirmed())
+schedule.every(3).minutes.do(todayshow,todayconfirmed())
+schedule.every(3).minutes.do(todayshow,allconfirmed())
 
 while True:
     try:
         bot.polling(none_stop=True)
-        schedule.run_pending()  
+        schedule.run_pending()
+        time.sleep(1)  
             
     except:
         time.sleep(1)
