@@ -115,9 +115,9 @@ try:
 		text = message.text
 		for position, item in enumerate(cardlabel):
 			if item == text:
-				bot.send_message(chat_id,f'اخر تقرير محدث عن منطقة {item} 📃 ')
+				bot.send_message(chat_id,f'اخر تقرير محدث عن  {item} 📃 ')
 				#bot.send_message(chat_id,position)
-				bot.send_message(chat_id,f'  اجمالي عدد الحالات في منطقة {item}  👀 ')
+				bot.send_message(chat_id,f'  اجمالي عدد الحالات في  {item}  👀 ')
 				bot.send_message(chat_id,cardcases[position])
 				#bot.send_message(chat_id,'الحالات النشطة')
 				#bot.send_message(chat_id,cardactive[position])
