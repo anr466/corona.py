@@ -59,7 +59,7 @@ try:
 	def todayconfirmed(message):
 
 		chat_id = message.chat.id
-		bot.send_message(chat_id,'الحالات اليوميه لمصابي فايروس كورونا بالسعوديه فور الاعلان عنها ')
+		bot.send_message(chat_id,'الحالات اليوميه لمصابي فايروس كورونا بالسعوديه فور الاعلان')
 		index1 = 0 
 		index2 = 0
 		# يعرض اصابات اليوم فقط
@@ -92,7 +92,7 @@ try:
 			elif item2 == all_number_confirmed[3]:
 				bot.send_message(chat_id,lable_all_confirmed[3])
 		index2 +=1
-		bot.send_message(chat_id,"سوف يتم تحديث البحث بالمنطقة قريبا ")
+		bot.send_message(chat_id,"بآمكانك الان البحث بآسم المدينة اكتب اسم المدينة فقط ")
 except: 
 	print("werrr")		 
 
@@ -113,21 +113,23 @@ try:
 	def echo_message(message):
 		chat_id = message.chat.id
 		text = message.text
-		index3 = 0
 		for position, item in enumerate(cardlabel):
 			if item == text:
-				bot.send_message(chat_id,f'اخر تقرير محدث عن منطقة {item}')
+				bot.send_message(chat_id,f'اخر تقرير محدث عن منطقة {item} 📃 ')
 				#bot.send_message(chat_id,position)
-				bot.send_message(chat_id,f' اجمالي عدد الحالات في منطقة {item}')
+				bot.send_message(chat_id,f'  اجمالي عدد الحالات في منطقة {item}  👀 ')
 				bot.send_message(chat_id,cardcases[position])
 				#bot.send_message(chat_id,'الحالات النشطة')
 				#bot.send_message(chat_id,cardactive[position])
-				bot.send_message(chat_id,'حالات التعافي')
+				bot.send_message(chat_id,' 💚 حالات التعافي')
 				bot.send_message(chat_id,cardcured[position])
-				bot.send_message(chat_id,'الوفيات')
+				bot.send_message(chat_id,'😢 الوفيات')
 				bot.send_message(chat_id,carddeath[position])
+				bot.send_message(chat_id,'لعرض جميع الحالات لهذا اليوم اظغط على /start')
 				break
-
+		if item != text:
+			bot.send_message(chat_id,'تاكد من كتابة الاسم !! 😇  ')
+			
 except:
 	print("erooor")
 
