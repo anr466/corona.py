@@ -141,7 +141,7 @@ try:
 		bot.polling(none_stop=True)
 except:
 
-	time.sleep(1)
+	time.sleep(10)
 
 
 
