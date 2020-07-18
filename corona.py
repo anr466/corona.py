@@ -10,7 +10,7 @@ import json
 
 # نضع التوكن لبوت التلقرام
 TOKEN = "1041038137:AAEwfNa6L05P1EqcHGw_JsJ9VF4w6sxsF0o"
-server = Flask(__name__)
+#server = Flask(__name__)
 
 
 bot = telebot.TeleBot(TOKEN)
@@ -146,18 +146,18 @@ except:
 
 
 
-@server.route('/' + TOKEN, methods=['POST'])
-def getMessage():
-    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
-    return "!", 200
+#@server.route('/' + TOKEN, methods=['POST'])
+#def getMessage():
+ #   bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+  #  return "!", 200
 
 
-@server.route("/")
-def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url='https://secure-refuge-39491.herokuapp.com/' + TOKEN)
-    return "!", 200
+#@server.route("/")
+#def webhook():
+ #   bot.remove_webhook()
+  #  bot.set_webhook(url='https://secure-refuge-39491.herokuapp.com/' + TOKEN)
+   # return "!", 200
 
 
-if __name__ == "__main__":
-    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
+#if __name__ == "__main__":
+ #   server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
