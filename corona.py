@@ -6,7 +6,7 @@ from flask import Flask, request
 import telebot
 from telebot import types
 import json
-
+import newcaseincity
 
 # نضع التوكن لبوت التلقرام
 TOKEN = "1041038137:AAEwfNa6L05P1EqcHGw_JsJ9VF4w6sxsF0o"
@@ -48,13 +48,12 @@ cardcases = [item.find(class_='cardcases').get_text(strip=True) for item in city
 #الحالات النشطة
 cardactive = soup2.select('cardactive')
 for cardactive in citycard:
-	headline_text = cardactive.get_text(strip=True)
-	#print(headline_text)
+    headline_text = cardactive.get_text(strip=True)
+    #print(headline_text)
 
 #التعافي
 statsnum = [item.find(class_='statsnum').get('data-count') for item in statscard ]
 
-print(statsnum[4])
 #التعافي
 cardcured = [item.find(class_='cardcured').get_text(strip=True) for item in citycard ]
 #الوفيات
@@ -63,94 +62,99 @@ carddeath = [item.find(class_='carddeath').get_text(strip=True) for item in city
 
 try:
 
-	@bot.message_handler(commands=['start', 'الحالات','حالات اليوم','اصابات','اليوم','تقرير اليوم','حالات'])
-	def todayconfirmed(message):
-		chat_id = message.chat.id
-		bot.send_message(chat_id,'الحالات اليوميه')
-		index1 = 0 
-		index2 = 0
-		# يعرض اصابات اليوم فقط
-		for item in lable_confirmed_today:
-			bot.send_message(chat_id,item)
-			if item == lable_confirmed_today[0]:
-				if today_confirmed_number[0] == "0":
-					bot.send_message(chat_id,"لم يتم التحديث بعد")
-				else:
-					bot.send_message(chat_id,f'💔{today_confirmed_number[0]}')
-			elif item == lable_confirmed_today[1]:
-				if today_confirmed_number[1] == "0":
-					bot.send_message(chat_id,"لم يتم التحديث بعد")
-				else:
-					bot.send_message(chat_id,f'😢{today_confirmed_number[1]}')
-					bot.send_message(chat_id,"التعافي 💚 ")
-					bot.send_message(chat_id,statsnum[4])		
-			elif item == lable_confirmed_today[2]:
-				bot.send_message(chat_id,f'🌡‍️{today_confirmed_number[2]}')
-			elif item == lable_confirmed_today[3]:
-				bot.send_message(chat_id,f'💊{today_confirmed_number[3]}')
-		index1 +=1
-		bot.send_message(chat_id," اجمالي عدد الحالات📑 ")
-		for item2 in all_number_confirmed:
-			bot.send_message(chat_id,item2)
-			if item2 == all_number_confirmed[0]:
-				bot.send_message(chat_id,f'💔{lable_all_confirmed[0]}')
-			elif item2 == all_number_confirmed[1]:
-				bot.send_message(chat_id,f'💚{lable_all_confirmed[1]}')
-			elif item2 == all_number_confirmed[2]:
-				bot.send_message(chat_id,f'😢{lable_all_confirmed[2]}')
-			elif item2 == all_number_confirmed[3]:
-				bot.send_message(chat_id,f'{lable_all_confirmed[3]}')
-		index2 +=1
-		bot.send_message(chat_id,"بآمكانك الان البحث بآسم المدينة اكتب اسم المدينة فقط ")
-except: 
-	print("werrr")		 
-
-
-
-
+    @bot.message_handler(commands=['start', 'الحالات','حالات اليوم','اصابات','اليوم','تقرير اليوم','حالات'])
+    def todayconfirmed(message):
+        chat_id = message.chat.id
+        bot.send_message(chat_id,'الحالات اليوميه')
+        index1 = 0
+        index2 = 0
+        # يعرض اصابات اليوم فقط
+        for item in lable_confirmed_today:
+            bot.send_message(chat_id,item)
+            if item == lable_confirmed_today[0]:
+                if today_confirmed_number[0] == "0":
+                    bot.send_message(chat_id,"لم يتم التحديث بعد")
+                else:
+                    bot.send_message(chat_id,f'💔{today_confirmed_number[0]}')
+            elif item == lable_confirmed_today[1]:
+                if today_confirmed_number[1] == "0":
+                    bot.send_message(chat_id,"لم يتم التحديث بعد")
+                else:
+                    bot.send_message(chat_id,f'😢{today_confirmed_number[1]}')
+                    bot.send_message(chat_id,"التعافي 💚 ")
+                    bot.send_message(chat_id,statsnum[4])
+            elif item == lable_confirmed_today[2]:
+                bot.send_message(chat_id,f'🌡‍️{today_confirmed_number[2]}')
+            elif item == lable_confirmed_today[3]:
+                bot.send_message(chat_id,f'💊{today_confirmed_number[3]}')
+        index1 +=1
+        bot.send_message(chat_id," اجمالي عدد الحالات📑 ")
+        for item2 in all_number_confirmed:
+            bot.send_message(chat_id,item2)
+            if item2 == all_number_confirmed[0]:
+                bot.send_message(chat_id,f'💔{lable_all_confirmed[0]}')
+            elif item2 == all_number_confirmed[1]:
+                bot.send_message(chat_id,f'💚{lable_all_confirmed[1]}')
+            elif item2 == all_number_confirmed[2]:
+                bot.send_message(chat_id,f'😢{lable_all_confirmed[2]}')
+            elif item2 == all_number_confirmed[3]:
+                bot.send_message(chat_id,f'{lable_all_confirmed[3]}')
+        index2 +=1
+        bot.send_message(chat_id,"بآمكانك الان البحث بآسم المدينة اكتب اسم المدينة فقط ")
+except:
+    print("werrr")
 
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-	bot.reply_to(message, f'هذي تحديثات اليوم {todayconfirmed}')
+    bot.reply_to(message, f'هذي تحديثات اليوم {todayconfirmed}')
+
+try:
+
+    @bot.message_handler(func = lambda m: True)
+    def echo_message(message):
+        chat_id = message.chat.id
+        bb= newcaseincity.hh
+        vv= newcaseincity.vv
+        healthytoday = newcaseincity.xx
+        deathtoday = newcaseincity.zz
+        text = message.text
+        #bb = newcaseincity.newcasesincity(dd)
+        for position, item in enumerate(cardlabel):
+            if item == text:
+                bot.send_message(chat_id,f'اخر تقرير محدث عن  {item} 📃 ')
+                #bot.send_message(chat_id,position)
+                bot.send_message(chat_id,'  حالات اليوم 😞 ')
+                bot.send_message(chat_id,bb[position])
+                bot.send_message(chat_id,'  حالات التعافي اليوم 😊')
+                bot.send_message(chat_id,healthytoday[position])
+                bot.send_message(chat_id,'  وفيات اليوم 😣')
+                bot.send_message(chat_id,deathtoday[position])
+                bot.send_message(chat_id,f'  اجمالي عدد الحالات في  {item}  👀 ')
+                bot.send_message(chat_id,cardcases[position])
+                bot.send_message(chat_id,'  الحالات النشطة 😕')
+                bot.send_message(chat_id,vv[position])
+                bot.send_message(chat_id,'  حالات التعافي 💚')
+                bot.send_message(chat_id,cardcured[position])
+                bot.send_message(chat_id,' الوفيات 😢')
+                bot.send_message(chat_id,carddeath[position])
+                bot.send_message(chat_id,'لعرض جميع الحالات لهذا اليوم اظغط على /start')
+                break
+        if item != text:
+            bot.send_message(chat_id,'تاكد من كتابة اسم المدينة او المنطقة !! 😇  ')
+
+except:
+    print("erooor")
 
 
 
 try:
+    while True:
 
-	@bot.message_handler(func = lambda m: True)
-	def echo_message(message):
-		chat_id = message.chat.id
-		text = message.text
-		for position, item in enumerate(cardlabel):
-			if item == text:
-				#bot.send_message(chat_id,f'اخر تقرير محدث عن  {item} 📃 ')
-				#bot.send_message(chat_id,position)
-				bot.send_message(chat_id,f'  اجمالي عدد الحالات في  {item}  👀 ')
-				bot.send_message(chat_id,cardcases[position])
-				#bot.send_message(chat_id,'الحالات النشطة')
-				#bot.send_message(chat_id,cardactive[position])
-				bot.send_message(chat_id,' 💚 حالات التعافي')
-				bot.send_message(chat_id,cardcured[position])
-				bot.send_message(chat_id,'😢 الوفيات')
-				bot.send_message(chat_id,carddeath[position])
-				bot.send_message(chat_id,'لعرض جميع الحالات لهذا اليوم اظغط على /start')
-				break
-		if item != text:
-			bot.send_message(chat_id,'تاكد من كتابة اسم المدينة او المنطقة !! 😇  ')
-			
-except:
-	print("erooor")
-
-
-
-try:
-	while True:
-
-		bot.polling(none_stop=True)
+        bot.polling(none_stop=True)
 except:
 
-	time.sleep(10)
+    time.sleep(10)
 
 
 
