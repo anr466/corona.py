@@ -138,7 +138,7 @@ try:
                 bot.send_message(chat_id,cardcured[position])
                 bot.send_message(chat_id,' اجمالي الوفيات 😢')
                 bot.send_message(chat_id,carddeath[position])
-                bot.send_message(chat_id,'لعرض جميع الحالات لهذا اليوم اظغط على /start')
+                bot.send_message(chat_id,'لعرض جميع الحالات لهذا اليوم اضغط على /start')
                 break
         if item != text:
             bot.send_message(chat_id,'تاكد من كتابة اسم المدينة او المنطقة !! 😇  ')
