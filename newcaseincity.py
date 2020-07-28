@@ -32,15 +32,15 @@ for body in table.find_all('tbody'):
 
 ########الحالات النشطة###########
 vv = []
+
 for body in table.find_all('tbody'):
     rows = body.find_all('tr')
     for row in rows:
         pp = row.find('td',style='color: #f39219;')
         if pp:
-            dd = str(pp.get_text().strip('%'))
-            vv.append(dd)      
-
-
+            dd = pp.get_text().strip('%')
+            qq = dd[:-3]
+            vv.append(qq)    
 
 
 ########التعافي الجديدة ###########
@@ -50,8 +50,8 @@ for body in table.find_all('tbody'):
     for row in rows:
         pp = row.find('td',style='background:#2fab4b;color:white;')
         if pp:
-            dd = str(pp.get_text().strip('+'))
-            xx.append(dd) 
+            dd = pp.get_text().strip('+')
+            xx.append(dd)
 
 
 
