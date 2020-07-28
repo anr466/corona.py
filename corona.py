@@ -9,10 +9,7 @@ import json
 import newcaseincity
 
 # نضع التوكن لبوت التلقرام
-TOKEN = "1041038137:AAEwfNa6L05P1EqcHGw_JsJ9VF4w6sxsF0o"
-#server = Flask(__name__)
-
-
+TOKEN = "token"
 bot = telebot.TeleBot(TOKEN)
 
 
